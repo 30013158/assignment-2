@@ -39,6 +39,13 @@
             this.btnclear = new System.Windows.Forms.Button();
             this.btnupdate = new System.Windows.Forms.Button();
             this.btnadd = new System.Windows.Forms.Button();
+            this.lblFName = new System.Windows.Forms.Label();
+            this.lblLName = new System.Windows.Forms.Label();
+            this.lblPhone = new System.Windows.Forms.Label();
+            this.txtFName = new System.Windows.Forms.TextBox();
+            this.txtLName = new System.Windows.Forms.TextBox();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblsearch
@@ -57,6 +64,7 @@
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(192, 20);
             this.txtsearch.TabIndex = 1;
+            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // btnSearch
             // 
@@ -66,6 +74,7 @@
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "SEARCH";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // listBox1
             // 
@@ -83,6 +92,7 @@
             this.btnlistCust.TabIndex = 4;
             this.btnlistCust.Text = "LIST CUSTOMERS";
             this.btnlistCust.UseVisualStyleBackColor = true;
+            this.btnlistCust.Click += new System.EventHandler(this.btnlistCust_Click);
             // 
             // btnclearList
             // 
@@ -95,16 +105,22 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(503, 80);
+            this.groupBox1.Controls.Add(this.txtPhone);
+            this.groupBox1.Controls.Add(this.txtLName);
+            this.groupBox1.Controls.Add(this.txtFName);
+            this.groupBox1.Controls.Add(this.lblPhone);
+            this.groupBox1.Controls.Add(this.lblLName);
+            this.groupBox1.Controls.Add(this.lblFName);
+            this.groupBox1.Location = new System.Drawing.Point(428, 63);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(207, 39);
+            this.groupBox1.Size = new System.Drawing.Size(293, 208);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "CustomerDetails:";
             // 
             // bTNdelete
             // 
-            this.bTNdelete.Location = new System.Drawing.Point(428, 329);
+            this.bTNdelete.Location = new System.Drawing.Point(428, 331);
             this.bTNdelete.Name = "bTNdelete";
             this.bTNdelete.Size = new System.Drawing.Size(141, 37);
             this.bTNdelete.TabIndex = 7;
@@ -114,7 +130,7 @@
             // 
             // btnclear
             // 
-            this.btnclear.Location = new System.Drawing.Point(589, 329);
+            this.btnclear.Location = new System.Drawing.Point(592, 332);
             this.btnclear.Name = "btnclear";
             this.btnclear.Size = new System.Drawing.Size(133, 36);
             this.btnclear.TabIndex = 8;
@@ -139,6 +155,54 @@
             this.btnadd.Text = "ADD";
             this.btnadd.UseVisualStyleBackColor = true;
             // 
+            // lblFName
+            // 
+            this.lblFName.AutoSize = true;
+            this.lblFName.Location = new System.Drawing.Point(18, 39);
+            this.lblFName.Name = "lblFName";
+            this.lblFName.Size = new System.Drawing.Size(57, 13);
+            this.lblFName.TabIndex = 0;
+            this.lblFName.Text = "First Name";
+            // 
+            // lblLName
+            // 
+            this.lblLName.AutoSize = true;
+            this.lblLName.Location = new System.Drawing.Point(22, 87);
+            this.lblLName.Name = "lblLName";
+            this.lblLName.Size = new System.Drawing.Size(58, 13);
+            this.lblLName.TabIndex = 1;
+            this.lblLName.Text = "Last Name";
+            // 
+            // lblPhone
+            // 
+            this.lblPhone.AutoSize = true;
+            this.lblPhone.Location = new System.Drawing.Point(22, 137);
+            this.lblPhone.Name = "lblPhone";
+            this.lblPhone.Size = new System.Drawing.Size(38, 13);
+            this.lblPhone.TabIndex = 2;
+            this.lblPhone.Text = "Phone";
+            // 
+            // txtFName
+            // 
+            this.txtFName.Location = new System.Drawing.Point(92, 36);
+            this.txtFName.Name = "txtFName";
+            this.txtFName.Size = new System.Drawing.Size(145, 20);
+            this.txtFName.TabIndex = 3;
+            // 
+            // txtLName
+            // 
+            this.txtLName.Location = new System.Drawing.Point(92, 87);
+            this.txtLName.Name = "txtLName";
+            this.txtLName.Size = new System.Drawing.Size(143, 20);
+            this.txtLName.TabIndex = 4;
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Location = new System.Drawing.Point(92, 130);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(140, 20);
+            this.txtPhone.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -157,6 +221,8 @@
             this.Controls.Add(this.lblsearch);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,6 +241,12 @@
         private System.Windows.Forms.Button btnclear;
         private System.Windows.Forms.Button btnupdate;
         private System.Windows.Forms.Button btnadd;
+        private System.Windows.Forms.TextBox txtPhone;
+        private System.Windows.Forms.TextBox txtLName;
+        private System.Windows.Forms.TextBox txtFName;
+        private System.Windows.Forms.Label lblPhone;
+        private System.Windows.Forms.Label lblLName;
+        private System.Windows.Forms.Label lblFName;
     }
 }
 

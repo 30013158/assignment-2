@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomerApp
 {
-    class Customer
+  public  class Customer
     {   
         //3-auto properties 
         public string FName { get; set; }
@@ -25,8 +25,10 @@ namespace CustomerApp
         //method to return all the customer data with a tab in between
         public string GetCustomer()
         {
-            return "";
+            return $"{FName}\t{LName}\t{Phone}";
         }
 
+        
+     
     }
 }

@@ -83,6 +83,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(328, 212);
             this.listBox1.TabIndex = 3;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // btnlistCust
             // 
@@ -175,7 +176,7 @@
             this.btndelete.TabIndex = 7;
             this.btndelete.Text = "DELETE";
             this.btndelete.UseVisualStyleBackColor = true;
-            this.btndelete.Click += new System.EventHandler(this.button1_Click);
+            this.btndelete.Click += new System.EventHandler(this.btndelete_Click);
             // 
             // btnclear
             // 
@@ -194,6 +195,7 @@
             this.btnupdate.TabIndex = 9;
             this.btnupdate.Text = "UPDATE";
             this.btnupdate.UseVisualStyleBackColor = true;
+            this.btnupdate.Click += new System.EventHandler(this.btnupdate_Click);
             // 
             // btnadd
             // 
@@ -203,6 +205,7 @@
             this.btnadd.TabIndex = 10;
             this.btnadd.Text = "ADD";
             this.btnadd.UseVisualStyleBackColor = true;
+            this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
             // 
             // Form1
             // 

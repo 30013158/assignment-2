@@ -15,6 +15,8 @@ namespace CustomerForm
     {
         //Creating a list of Customer objects
          static List<Customer> CustomerDB = new List<Customer>();
+        static int currentIndex = 0;
+        static bool selected = false;
 
         //LoadDB method adds 4 new Customer objects to the CustomerDB List
         public void LoadDB()
@@ -68,6 +70,7 @@ namespace CustomerForm
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            bool check = false;
             if (txtBoxSearch.Text == "")
             {
               MessageBox.Show("You must enter a customer name.");
@@ -79,20 +82,21 @@ namespace CustomerForm
                 txtBoxSearch.Clear(); //clears search text box
                 ClearDisplay();  //calls clear display method to clear the listbox
 
-                for (int i = 0; i <= CustomerDB.Count; i++)
+                for (int i = 0; i < CustomerDB.Count; i++)
                 {
                     if (CustomerDB[i].FName == findName)
-                    { int index = i;
-                        listBox1.Items.Add(CustomerDB[i].GetCustomer());
-                    }
-                    else
                     {
-                        MessageBox.Show("Customer not found, please try again");
-                        txtBoxSearch.Focus();
+                        currentIndex = i;
+                        listBox1.Items.Add(CustomerDB[i].GetCustomer());
+                        check = true;
                     }
-
                 }
-                 
+                if(check == false)
+                 {
+                    MessageBox.Show("Customer not found, please try again");
+                    txtBoxSearch.Focus();
+                }
+
             }
         }
 
@@ -118,10 +122,42 @@ namespace CustomerForm
             btnadd.Enabled = true; 
         }
 
+        //Update button
         private void btnupdate_Click(object sender, EventArgs e)
         {
+            if(selected != true)
+            {
+                MessageBox.Show("Please select a customer to update.");
+                ClearDisplay();
+                DisplayCustomers();
+                selected = false;
+            }
+            else
+            {
+                if (txtBoxFName.Text == "" || txtBoxLName.Text == "" || txtBoxPhone.Text == "")
+                {
+                    MessageBox.Show("All textboxes must be filled to continue.");
 
+                   
+                }
+                else
+                {
+                    CustomerDB[listBox1.SelectedIndex].FName = txtBoxFName.Text;
+                    CustomerDB[listBox1.SelectedIndex].LName = txtBoxLName.Text;
+                    CustomerDB[listBox1.SelectedIndex].Phone = txtBoxPhone.Text;
+                    ClearBoxes();
+                    ClearDisplay();
+                    DisplayCustomers();
+                    MessageBox.Show("Customer Details Updated");
+                    btnadd.Enabled = true;
+                }
+                
+            }
+            
         }
+
+        //Add button first check to see if all the textboxes for new customer details
+        // are filled out and then adds the new customer to the customer DB list
 
         private void btnadd_Click(object sender, EventArgs e)
         {
@@ -139,32 +175,65 @@ namespace CustomerForm
             }
         }
 
+        //Delete button
+        //i used the foolowing links to search for message buttons and removing selected items
+        /* https://www.c-sharpcorner.com/UploadFile/mahesh/understanding-message-box-in-windows-forms-using-C-Sharp */
+        /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.listbox.selectedindex?view=netframework-4.8*/
+
+
         private void btndelete_Click(object sender, EventArgs e)
         {
             //if statement to see if an item is selected
-            string selection = listBox1.SelectedItem.ToString();
-             if( selection == "")
+
+            if (selected != true)
             {
                 MessageBox.Show("Please select a customer to delete.");
                 ClearDisplay();
-                ClearBoxes();
+                DisplayCustomers();
+                selected = false;
             }
             else
             {
+                
 
+                string message = "Are you sure you want to delete this customer?";
+                string title = "Delete Customer";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+
+                if (result == DialogResult.Yes)
+                {
+                    listBox1.Items.RemoveAt(currentIndex);
+                    ClearBoxes();
+                    ClearDisplay();
+                    DisplayCustomers();
+                    MessageBox.Show("The customer has been deleted.");
+                }
+                else
+                {
+                    MessageBox.Show("Operation cancelled.");
+                }
             }
-
-            listBox1.Items.Remove(listBox1.SelectedItem);
+               
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnadd.Enabled = false;   //disables the add button when an item is selected
-            //string[] selectedCustomer = { listBox1.SelectedItem.ToString(), };
-            //string[] selectedCustomer = {listBox1.SelectedItem.FName, listBox1.SelectedItem.LName, listBox1.SelectedItem.Phone}
-            // selectedCustomer[0] = txtBoxFName.Text;
+            selected = true;
+            string[] selectedCustomer = new string[3];
+            selectedCustomer = listBox1.SelectedItem.ToString().Split();
+            
 
+           txtBoxFName.Text = selectedCustomer[0];
+            txtBoxLName.Text = selectedCustomer[1];
+            txtBoxPhone.Text = selectedCustomer[2];
 
+            foreach(Customer c in CustomerDB)
+            {
+                if (c.FName == selectedCustomer[0])
+                { currentIndex = CustomerDB.IndexOf(c); }
+            }
         }
     }
 }
